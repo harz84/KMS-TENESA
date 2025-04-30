@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - KMS TENESA</title>
+    <link rel="stylesheet" href="style.css"> <!-- Gunakan CSS yang sama -->
+    <!-- Impor Google Fonts (Sama seperti index.html) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Tambahkan style khusus untuk login jika perlu, atau di style.css -->
+    <style>
+        body.login-page {
+            background-color: var(--background-light); /* Latar belakang terang */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .login-container {
+            background-color: var(--background-app); /* Putih */
+            padding: 40px 50px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 420px; /* Lebar box login */
+            text-align: center;
+        }
+
+        .login-container h2 {
+            color: var(--primary-color);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        .login-container p {
+            color: var(--text-muted);
+            margin-bottom: 30px;
+            font-size: 0.95em;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 500;
+            font-size: 0.9em;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            font-size: 1em;
+            font-family: var(--font-family);
+            box-sizing: border-box; /* Pastikan padding tidak menambah lebar */
+            transition: border-color 0.3s ease;
+        }
+         .input-group input:focus {
+             outline: none;
+             border-color: var(--primary-color);
+             box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.2);
+         }
+
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: var(--text-light);
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            margin-top: 10px; /* Jarak dari input terakhir */
+        }
+
+        .login-button:hover {
+            background-color: var(--hover-color);
+        }
+
+        .error-message {
+            color: #dc3545; /* Merah untuk error */
+            background-color: #f8d7da; /* Background merah muda */
+            border: 1px solid #f5c6cb;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-top: 20px;
+            font-size: 0.9em;
+            display: none; /* Sembunyikan secara default */
+        }
+        .error-message.show {
+            display: block; /* Tampilkan jika ada error */
+        }
+
+    </style>
+</head>
+<body class="login-page">
+
+    <div class="login-container">
+        <h2>Selamat Datang di KMS TENESA</h2>
+        <p>Silakan login untuk mengakses Knowledge Management System.</p>
+
+        <!-- Form Login -->
+        <form id="login-form">
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required placeholder="Masukkan username Anda">
+            </div>
+            <div class="input-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" required placeholder="Masukkan password Anda">
+            </div>
+
+            <!-- Tempat untuk menampilkan pesan error -->
+            <div id="error-message" class="error-message">
+                Username atau password salah. Silakan coba lagi.
+            </div>
+
+            <button type="submit" class="login-button">Login</button>
+        </form>
+        <!-- Akhir Form Login -->
+
+    </div> <!-- Akhir login-container -->
+
+    <!-- Script untuk handle login (simulasi frontend) -->
+    <script>
+        const loginForm = document.getElementById('login-form');
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+        const errorMessage = document.getElementById('error-message');
+
+        // Contoh user (HARUS diganti dengan validasi backend nanti)
+        const validUsers = {
+            "admin_kms": "TenesaAdmin!24",
+            "agent001": "PasswordAgent#1"
+            // Tambahkan user lain jika perlu
+        };
+
+        loginForm.addEventListener('submit', function(event) {
+            event.preventDefault(); // Mencegah form submit standar
+
+            const username = usernameInput.value.trim();
+            const password = passwordInput.value; // Jangan trim password
+
+            // Sembunyikan pesan error sebelumnya
+            errorMessage.classList.remove('show');
+
+            // --- SIMULASI VALIDASI ---
+            // Ini HANYA simulasi di frontend. Validasi asli HARUS di backend.
+            if (validUsers[username] && validUsers[username] === password) {
+                // Login berhasil (simulasi)
+                alert(`Login berhasil! Selamat datang, ${username}!`);
+                // Arahkan ke halaman aplikasi utama
+                window.location.href = 'index.html'; // Ganti dengan nama file HTML utama Anda
+            } else {
+                // Login gagal
+                errorMessage.textContent = "Username atau password salah. Silakan coba lagi.";
+                errorMessage.classList.add('show'); // Tampilkan pesan error
+            }
+            // --- AKHIR SIMULASI VALIDASI ---
+        });
+    </script>
+
+</body>
+</html>
