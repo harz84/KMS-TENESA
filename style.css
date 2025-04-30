@@ -1,0 +1,317 @@
+/* Import Font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+/* Reset Dasar & Variabel Warna */
+:root {
+    --primary-color: #007bff; /* Biru cerah */
+    --secondary-color: #6c757d; /* Abu-abu netral */
+    --background-light: #f8f9fa; /* Latar belakang sangat terang */
+    --background-app: #ffffff; /* Latar belakang utama app */
+    --background-sidebar: #343a40; /* Sidebar gelap */
+    --text-light: #ffffff;
+    --text-dark: #212529;
+    --text-muted: #6c757d;
+    --border-color: #dee2e6;
+    --ai-message-bg: #e9ecef;
+    --user-message-bg: #007bff;
+    --user-message-text: #ffffff;
+    --hover-color: #0056b3;
+    --font-family: 'Inter', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    background-color: var(--background-light);
+    color: var(--text-dark);
+    line-height: 1.6;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh; /* Pastikan body setidaknya setinggi viewport */
+}
+
+.app-container {
+    display: flex;
+    width: 95%;
+    max-width: 1400px; /* Lebar maksimum aplikasi */
+    height: 90vh; /* Tinggi aplikasi, misal 90% viewport */
+    max-height: 800px; /* Batas tinggi maksimum */
+    background-color: var(--background-app);
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden; /* Penting agar border-radius bekerja */
+}
+
+/* --- Sidebar --- */
+.sidebar {
+    width: 300px; /* Lebar tetap sidebar */
+    background-color: var(--background-sidebar);
+    color: var(--text-light);
+    padding: 25px 20px;
+    display: flex;
+    flex-direction: column;
+    flex-shrink: 0; /* Mencegah sidebar menyusut */
+}
+
+.logo-area {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #495057;
+}
+.logo-area h2 {
+    font-weight: 700;
+    color: var(--primary-color);
+}
+.logo-area p {
+    font-size: 0.9em;
+    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.menu {
+    margin-bottom: 30px;
+}
+.menu-item {
+    display: block;
+    color: var(--text-light);
+    text-decoration: none;
+    padding: 12px 15px;
+    margin-bottom: 8px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    font-weight: 500;
+}
+.menu-item i {
+    margin-right: 10px;
+    width: 20px; /* Ensure icons align */
+    text-align: center;
+}
+.menu-item:hover {
+    background-color: #495057; /* Warna hover sedikit lebih terang */
+}
+.menu-item.active {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    font-weight: 600;
+}
+
+.sidebar-section {
+    margin-bottom: 25px;
+    padding: 15px;
+    background-color: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+}
+.sidebar-section h3 {
+    font-size: 1em;
+    margin-bottom: 15px;
+    font-weight: 600;
+    color: var(--text-light);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 8px;
+}
+.sidebar-section h3 i {
+    margin-right: 8px;
+    color: var(--primary-color);
+}
+
+.upload-box {
+    text-align: center;
+    margin-bottom: 15px;
+}
+.upload-button {
+    display: inline-block;
+    background-color: var(--primary-color);
+    color: var(--text-light);
+    padding: 10px 15px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em;
+}
+.upload-button:hover {
+    background-color: var(--hover-color);
+}
+.upload-button i {
+    margin-right: 8px;
+}
+#file-name {
+    margin-top: 10px;
+    font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: background-color 0.3s ease;
+    text-align: center;
+}
+.btn-primary {
+    background-color: var(--primary-color);
+    color: var(--text-light);
+}
+.btn-primary:hover {
+     background-color: var(--hover-color);
+}
+.btn-upload {
+    margin-top: 10px; /* Jarak dari info file */
+}
+
+
+.ai-select {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid var(--border-color);
+    background-color: var(--background-app); /* Sama seperti background utama */
+    color: var(--text-dark);
+    margin-bottom: 10px;
+    font-family: var(--font-family);
+}
+.ai-description {
+    font-size: 0.85em;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.sidebar-footer {
+    margin-top: auto; /* Mendorong footer ke bawah */
+    text-align: center;
+    font-size: 0.8em;
+    color: var(--text-muted);
+    color: rgba(255, 255, 255, 0.5);
+    padding-top: 20px;
+    border-top: 1px solid #495057;
+}
+
+
+/* --- Chat Area --- */
+.chat-area {
+    flex-grow: 1; /* Mengambil sisa ruang */
+    display: flex;
+    flex-direction: column;
+    background-color: var(--background-app);
+}
+
+.chat-header {
+    padding: 20px 30px;
+    border-bottom: 1px solid var(--border-color);
+    background-color: #fdfdfd; /* Sedikit berbeda dari background chat */
+}
+.chat-header h1 {
+    font-size: 1.4em;
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+.chat-header p {
+    font-size: 0.9em;
+    color: var(--text-muted);
+}
+
+.chat-messages {
+    flex-grow: 1; /* Mengisi ruang vertikal */
+    padding: 30px;
+    overflow-y: auto; /* Scroll jika pesan banyak */
+    background-color: #f7f7f7; /* Latar belakang area pesan */
+}
+
+.message {
+    margin-bottom: 20px;
+    display: flex;
+}
+.message-bubble {
+    max-width: 75%; /* Maks lebar bubble */
+    padding: 12px 18px;
+    border-radius: 18px;
+    word-wrap: break-word; /* Memecah kata panjang */
+}
+.message-bubble p {
+     margin: 0;
+     line-height: 1.5;
+}
+
+.ai-message {
+    justify-content: flex-start; /* AI di kiri */
+}
+.ai-message .message-bubble {
+    background-color: var(--ai-message-bg);
+    color: var(--text-dark);
+    border-bottom-left-radius: 5px; /* Bentuk sedikit beda */
+}
+
+.user-message {
+    justify-content: flex-end; /* User di kanan */
+}
+.user-message .message-bubble {
+    background-color: var(--user-message-bg);
+    color: var(--user-message-text);
+    border-bottom-right-radius: 5px; /* Bentuk sedikit beda */
+}
+
+.chat-input-area {
+    display: flex;
+    padding: 15px 30px;
+    border-top: 1px solid var(--border-color);
+    background-color: var(--background-app);
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid var(--border-color);
+    border-radius: 25px; /* Rounded input */
+    margin-right: 10px;
+    font-size: 1em;
+    font-family: var(--font-family);
+    outline: none;
+    transition: border-color 0.3s ease;
+}
+#message-input:focus {
+    border-color: var(--primary-color);
+}
+
+.send-btn {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%; /* Tombol bulat */
+    width: 48px;
+    height: 48px;
+    font-size: 1.2em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+}
+.send-btn:hover {
+    background-color: var(--hover-color);
+}
+
+/* --- Scrollbar Styling (Opsional, untuk Chrome/Safari) --- */
+.chat-messages::-webkit-scrollbar {
+  width: 8px;
+}
+.chat-messages::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+.chat-messages::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+.chat-messages::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}

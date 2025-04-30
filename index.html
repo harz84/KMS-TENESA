@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMS TENESA - Knowledge Management</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Impor Google Fonts (Contoh: Inter) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Impor Font Awesome untuk Ikon (opsional tapi bagus) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar untuk Upload dan Pengaturan -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <h2>KMS TENESA</h2>
+                <p>Knowledge Management System</p>
+            </div>
+            <nav class="menu">
+                <a href="#chat" class="menu-item active"><i class="fas fa-comments"></i> Chat Bantuan</a>
+                <a href="#upload" class="menu-item"><i class="fas fa-upload"></i> Unggah Knowledge</a>
+                <a href="#settings" class="menu-item"><i class="fas fa-cog"></i> Pengaturan AI</a>
+            </nav>
+
+            <div id="upload" class="sidebar-section">
+                <h3><i class="fas fa-upload"></i> Unggah Knowledge Base (PDF)</h3>
+                <div class="upload-box">
+                    <input type="file" id="pdf-upload" accept=".pdf" hidden>
+                    <label for="pdf-upload" class="upload-button">
+                        <i class="fas fa-file-pdf"></i> Pilih File PDF
+                    </label>
+                    <p id="file-name">Belum ada file dipilih</p>
+                </div>
+                 <button class="btn btn-primary btn-upload">Unggah Sekarang</button>
+            </div>
+
+            <div id="settings" class="sidebar-section">
+                <h3><i class="fas fa-cog"></i> Pilih Platform AI</h3>
+                 <select id="ai-platform-select" class="ai-select">
+                    <option value="gemini">Google Gemini</option>
+                    <option value="openai">OpenAI GPT</option>
+                    <option value="deepseek">DeepSeek</option>
+                    <!-- Tambahkan model lain jika perlu -->
+                </select>
+                <p class="ai-description">Pilih AI untuk memproses pertanyaan Anda.</p>
+            </div>
+
+            <div class="sidebar-footer">
+                <p>© 2024 Perusahaan Telekomunikasi Anda</p>
+            </div>
+        </aside>
+
+        <!-- Area Chat Utama -->
+        <main id="chat" class="chat-area">
+            <header class="chat-header">
+                <h1>Tanya KMS TENESA</h1>
+                <p>Dapatkan informasi produk dan layanan dengan cepat.</p>
+            </header>
+
+            <div class="chat-messages" id="chat-messages">
+                <!-- Pesan Selamat Datang Awal -->
+                <div class="message ai-message">
+                    <div class="message-bubble">
+                        <p>Halo! Ada yang bisa saya bantu terkait produk atau layanan TENESA? Silakan ketik pertanyaan Anda di bawah.</p>
+                    </div>
+                </div>
+                <!-- Contoh Pesan Agent (akan ditambahkan via JS) -->
+                <!-- <div class="message user-message">
+                    <div class="message-bubble">
+                        <p>Apa saja paket internet rumah dan harganya?</p>
+                    </div>
+                </div> -->
+                <!-- Contoh Pesan AI (akan ditambahkan via JS) -->
+                 <!-- <div class="message ai-message">
+                    <div class="message-bubble">
+                        <p>Tentu, berikut adalah paket internet rumah yang tersedia: [Detail paket dari AI akan muncul di sini...] Berdasarkan dokumen 'Harga IndiHome Q3 2024'.</p>
+                    </div>
+                </div> -->
+            </div>
+
+            <footer class="chat-input-area">
+                <input type="text" id="message-input" placeholder="Ketik pertanyaan Anda di sini...">
+                <button id="send-button" class="send-btn">
+                    <i class="fas fa-paper-plane"></i> Kirim
+                </button>
+            </footer>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
