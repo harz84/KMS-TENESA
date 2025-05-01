@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login - KMS TENESA</title>
-    <link rel="stylesheet" href="style.css"> <!-- Gunakan CSS yang sama -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> <!-- Gunakan CSS yang sama -->
     <!-- Impor Google Fonts (Sama seperti index.html) -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -160,7 +160,7 @@
                 // Login berhasil (simulasi)
                 alert(`Login berhasil! Selamat datang, ${username}!`);
                 // Arahkan ke halaman aplikasi utama
-                window.location.href = 'index.html'; // Ganti dengan nama file HTML utama Anda
+                window.location.href = '/'; // Ganti dengan nama file HTML utama Anda
             } else {
                 // Login gagal
                 errorMessage.textContent = "Username atau password salah. Silakan coba lagi.";
