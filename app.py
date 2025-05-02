@@ -37,7 +37,7 @@ FAISS_INDEX_PATH = "faiss_index" # Nama folder untuk menyimpan index FAISS
 # Sebaiknya inisialisasi sekali saja untuk efisiensi
 try:
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001") # Atau model embedding lain yang sesuai
-    llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro-latest", temperature=0.5, convert_system_message_to_human=True)
+    llm = ChatGoogleGenerativeAI(model="gemini-2.0-flash", temperature=0.3, convert_system_message_to_human=True)
 except Exception as e:
     print(f"Error inisialisasi model Google AI (Embeddings/LLM): {e}")
     embeddings = None
@@ -205,6 +205,8 @@ def ask_ai():
         template = """
         Anda adalah asisten AI untuk agent Customer Care TENESA.
         Jawab pertanyaan berikut HANYA berdasarkan konteks yang diberikan di bawah.
+        JAWAB DENGAN RINGKAS DAN JELAS. Gunakan poin-poin jika memungkinkan.
+        Jika pertanyaan terlalu umum (misalnya 'apa yang kamu tahu?'), sebutkan topik utama yang ada dalam konteks, JANGAN tampilkan seluruh isinya.
         Jika informasi tidak ada dalam konteks, katakan 'Maaf, informasi tersebut tidak ditemukan dalam knowledge base yang saya miliki saat ini.'
         Jangan mencoba mengarang jawaban.
 
