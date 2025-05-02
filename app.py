@@ -37,7 +37,7 @@ FAISS_INDEX_PATH = "faiss_index" # Nama folder untuk menyimpan index FAISS
 # Sebaiknya inisialisasi sekali saja untuk efisiensi
 try:
     embeddings = GoogleGenerativeAIEmbeddings(model="models/embedding-001") # Atau model embedding lain yang sesuai
-    llm = ChatGoogleGenerativeAI(model="gemini-pro", temperature=0.3, convert_system_message_to_human=True)
+    llm = ChatGoogleGenerativeAI(model="gemini-1.5-pro-latest", temperature=0.5, convert_system_message_to_human=True)
 except Exception as e:
     print(f"Error inisialisasi model Google AI (Embeddings/LLM): {e}")
     embeddings = None
