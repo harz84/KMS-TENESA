@@ -239,6 +239,8 @@ body {
 .message-bubble p {
      margin: 0;
      line-height: 1.5;
+     white-space: pre-line;
+     word-wrap: break-word;
 }
 
 .ai-message {

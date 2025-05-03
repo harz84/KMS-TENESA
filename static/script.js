@@ -56,83 +56,78 @@ document.addEventListener('DOMContentLoaded', () => {
         const messageText = messageInput.value.trim();
 
         if (messageText === '') {
-            return; // Jangan kirim pesan kosong
+            return;
         }
 
-        // 1. Tampilkan pesan pengguna segera
         addMessage(messageText, 'user');
-
-        // 2. Kosongkan input dan beri fokus kembali
         messageInput.value = '';
-        messageInput.focus(); // Fokus kembali ke input setelah kirim
+        messageInput.focus();
 
-        // 3. Tampilkan indikator 'berpikir...' & disable input/button
-        const thinkingMessageId = 'thinking-' + Date.now(); // ID unik
+        // ---- Baca nilai platform dari dropdown ----
+        const platformSelect = document.getElementById('ai-platform-select');
+        const selectedPlatform = platformSelect ? platformSelect.value : 'gemini'; // Default ke 'gemini'
+        console.log(`Mengirim pertanyaan ke platform: ${selectedPlatform}`); // Log untuk debug
+        // -----------------------------------------
+
+        const thinkingMessageId = 'thinking-' + Date.now();
         const thinkingElement = addMessage('KMS TENESA sedang memproses...', 'ai', thinkingMessageId);
         messageInput.disabled = true;
         sendButton.disabled = true;
-        sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>'; // Ganti ikon jadi loading
+        sendButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
 
         try {
-            // 4. Kirim request ke backend '/ask'
             const response = await fetch('/ask', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ question: messageText }), // Kirim pertanyaan dalam format JSON
+                // ---- Sertakan platform dalam body JSON ----
+                body: JSON.stringify({
+                    question: messageText,
+                    platform: selectedPlatform // Kirim platform yang dipilih
+                }),
+                // -------------------------------------------
             });
 
-            // 5. Hapus pesan 'berpikir...'
-            const thinkingMsgElement = document.getElementById(thinkingMessageId);
-            if (thinkingMsgElement) {
-                thinkingMsgElement.remove();
-            }
-
-            // 6. Tangani response dari backend
-            if (response.ok) {
-                const data = await response.json();
-                if (data.answer) {
-                    // Tampilkan jawaban AI jika sukses
-                    addMessage(data.answer, 'ai');
-                } else if (data.error) {
-                    // Tampilkan pesan error dari backend (jika ada)
-                    console.error('Backend error:', data.error);
-                    addMessage(`Error dari server: ${data.error}`, 'ai', null, true);
-                } else {
-                    // Kasus aneh jika tidak ada jawaban atau error
-                     addMessage("Menerima respons kosong dari server.", 'ai', null, true);
-                }
-            } else {
-                // Tangani error HTTP (misal: 401 Unauthorized, 403 Forbidden, 500 Internal Server Error)
-                let errorText = `Error ${response.status}: ${response.statusText}`;
-                try {
-                    const errorData = await response.json(); // Coba dapatkan detail error dari body JSON
-                    errorText = `Error ${response.status}: ${errorData.error || response.statusText}`;
-                } catch (e) {
-                    // Biarkan errorText seperti semula jika body bukan JSON atau kosong
-                }
-                console.error('HTTP error:', errorText);
-                addMessage(errorText, 'ai', null, true); // Tampilkan pesan error HTTP
-            }
+            // ... (sisa logika fetch, handle response, catch, finally tetap sama) ...
+             const thinkingMsgElement = document.getElementById(thinkingMessageId);
+             if (thinkingMsgElement) {
+                 thinkingMsgElement.remove();
+             }
+             if (response.ok) {
+                 const data = await response.json();
+                 if (data.answer) {
+                     addMessage(data.answer, 'ai');
+                 } else if (data.error) {
+                     console.error('Backend error:', data.error);
+                     addMessage(`Error dari server: ${data.error}`, 'ai', null, true);
+                 } else {
+                      addMessage("Menerima respons kosong dari server.", 'ai', null, true);
+                 }
+             } else {
+                 let errorText = `Error ${response.status}: ${response.statusText}`;
+                 try {
+                     const errorData = await response.json();
+                     errorText = `Error ${response.status}: ${errorData.error || response.statusText}`;
+                 } catch (e) { /* ignore */ }
+                 console.error('HTTP error:', errorText);
+                 addMessage(errorText, 'ai', null, true);
+             }
 
         } catch (error) {
-            // Tangani error network atau error lainnya saat fetch
+             const thinkingMsgElement = document.getElementById(thinkingMessageId);
+             if (thinkingMsgElement) {
+                 thinkingMsgElement.remove();
+             }
             console.error('Fetch error:', error);
-             // Hapus pesan 'berpikir...' jika masih ada saat error network
-            const thinkingMsgElement = document.getElementById(thinkingMessageId);
-            if (thinkingMsgElement) {
-                thinkingMsgElement.remove();
-            }
             addMessage(`Tidak dapat terhubung ke server atau terjadi kesalahan jaringan. (${error.message})`, 'ai', null, true);
         } finally {
-            // 7. Aktifkan kembali input dan tombol, apapun hasilnya
             messageInput.disabled = false;
             sendButton.disabled = false;
-            sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>'; // Kembalikan ikon kirim
-             messageInput.focus(); // Fokus kembali
+            sendButton.innerHTML = '<i class="fas fa-paper-plane"></i>';
+             messageInput.focus();
         }
-    }
+    } // Akhir sendMessage
 
     // --- Event Listeners ---
 
