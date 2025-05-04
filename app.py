@@ -220,6 +220,22 @@ def ask_ai():
                 }
             )
             print("Menggunakan LLM: OpenRouter DeepSeek")
+        elif platform_choice == 'llama_maverick':
+            if not OPENROUTER_API_KEY:
+                raise ValueError("OPENROUTER_API_KEY tidak ditemukan di konfigurasi.")
+            llama_model_name = "meta-llama/llama-4-maverick:free"
+
+            llm = ChatOpenAI(
+                model=llama_model_name,
+                api_key=OPENROUTER_API_KEY,
+                openai_api_base="https://openrouter.ai/api/v1",
+                temperature=0.6,
+                default_headers={
+                    "HTTP-Referer": request.url_root if request else "http://localhost:5000/",
+                    "X-Title": "KMS TENESA"
+                }
+            )
+            print(f"Menggunakan LLM: Llama ({llama_model_name} via OpenRouter)")
 
         elif platform_choice == 'gemini':
             if not GOOGLE_API_KEY:
@@ -256,7 +272,9 @@ def ask_ai():
         # Template prompt bisa tetap sama atau disesuaikan per model jika perlu
         template = """
         Anda adalah asisten AI untuk agent Customer Care TENESA.
-        Jawab pertanyaan berikut HANYA berdasarkan konteks yang diberikan di bawah.
+        Anda akan berinteraksi dengan agent customer Care TENESA.
+        Anda memiliki akses ke Knowledge Base yang berisi informasi dari dokumen PDF yang diunggah oleh admin.
+        Berikan sapaan yang sesuai dan jawab pertanyaan berdasarkan konteks yang diberikan.
         JAWAB DENGAN RINGKAS DAN JELAS.
         Jika informasi tidak ada dalam konteks, katakan 'Maaf, informasi tersebut tidak ditemukan dalam knowledge base yang saya miliki saat ini.'
         Jangan mengarang jawaban.
