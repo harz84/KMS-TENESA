@@ -237,6 +237,24 @@ def ask_ai():
             )
             print(f"Menggunakan LLM: Llama ({llama_model_name} via OpenRouter)")
 
+        elif platform_choice == 'qwen':
+            if not OPENROUTER_API_KEY:
+                raise ValueError("OPENROUTER_API_KEY tidak ditemukan di konfigurasi.")
+            openai_model_name = "qwen/qwen3-32b:free" # Sesuaikan jika perlu
+            llm = ChatOpenAI(
+                model=openai_model_name,
+                api_key=OPENROUTER_API_KEY,
+                openai_api_base="https://openrouter.ai/api/v1",
+                temperature=0.5,
+                default_headers={
+                    "HTTP-Referer": request.url_root if request else "http://localhost:5000/",
+                    "X-Title": "KMS TENESA"
+                }
+            )
+            print(f"Menggunakan LLM: OpenAI ({openai_model_name} via OpenRouter)") 
+                     
+        
+            
         elif platform_choice == 'gemini':
             if not GOOGLE_API_KEY:
                 raise ValueError("GOOGLE_API_KEY tidak ditemukan di konfigurasi.")
